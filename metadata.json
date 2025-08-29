@@ -1,0 +1,5 @@
+{
+  "name": "ショート動画考査エージェント (Short Video Inspection Agent)",
+  "description": "Upload short videos to check for potential violations of Japan's Pharmaceutical Affairs Law. The agent provides a compliance score, identifies issues, and suggests improvements.",
+  "requestFramePermissions": []
+}
