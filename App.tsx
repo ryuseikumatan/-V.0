@@ -13,25 +13,25 @@ const InfoPanel: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-xl mb-6 lg:mb-8">
+    <div className="bg-black/20 border border-lime-400/20 rounded-xl mb-6 lg:mb-8 backdrop-blur-sm text-zinc-200 shadow-[0_0_15px_rgba(163,230,53,0.1)]">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center p-4"
       >
         <div className="flex items-center gap-3">
-          <InformationCircleIcon className="w-6 h-6 text-zinc-400" />
-          <h2 className="font-semibold text-lg text-zinc-200">このツールについて</h2>
+          <InformationCircleIcon className="w-6 h-6 text-lime-400/70" />
+          <h2 className="font-semibold text-lg text-zinc-100">このツールについて</h2>
         </div>
         <ChevronDownIcon className={`w-6 h-6 text-zinc-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       {isOpen && (
-        <div className="px-4 pb-4 border-t border-zinc-800 text-zinc-400 text-sm space-y-4">
+        <div className="px-4 pb-4 border-t border-lime-400/20 text-zinc-300 text-sm space-y-4">
           <div>
-            <h3 className="font-semibold text-zinc-300 mb-1">概要</h3>
+            <h3 className="font-semibold text-zinc-200 mb-1">概要</h3>
             <p>このエージェントは、アップロードされた動画コンテンツ（映像・音声）をAIが分析し、日本の薬機法（化粧品、健康食品など）に抵触する可能性のある表現を自動で検出するツールです。</p>
           </div>
           <div>
-            <h3 className="font-semibold text-zinc-300 mb-1">使い方</h3>
+            <h3 className="font-semibold text-zinc-200 mb-1">使い方</h3>
             <ol className="list-decimal list-inside space-y-1">
               <li><strong>動画を選択:</strong> 分析したい動画ファイル（.mp4など）を選択します。</li>
               <li><strong>分析開始:</strong> 「分析開始」ボタンを押し、処理が完了するまで待ちます。</li>
@@ -39,7 +39,7 @@ const InfoPanel: React.FC = () => {
             </ol>
           </div>
           <div>
-            <h3 className="font-semibold text-zinc-300 mb-1">注意点</h3>
+            <h3 className="font-semibold text-zinc-200 mb-1">注意点</h3>
             <ul className="list-disc list-inside space-y-1">
               <li><strong>動画の長さ:</strong> ブラウザ内で全ての処理を行うため、<strong>1分〜3分程度のショート動画</strong>で最適に動作します。長時間の動画は処理に失敗する可能性があります。</li>
               <li><strong>免責事項:</strong> 本エージェントの分析結果はAIによるものであり、法的アドバイスを代替するものではありません。最終的な判断は、必ず専門家にご相談ください。</li>
@@ -160,32 +160,32 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-200 p-4 lg:p-8 flex flex-col">
+    <div className="min-h-screen p-4 lg:p-8 flex flex-col">
       <header className="mb-6">
-        <h1 className="text-3xl lg:text-4xl font-bold text-center text-zinc-100">
+        <h1 className="text-4xl lg:text-5xl font-black text-center text-white">
           ショート動画考査エージェント
         </h1>
-        <p className="text-center text-zinc-400 mt-2">
+        <p className="text-center text-zinc-400 font-medium mt-2">
           AIが動画の映像と音声を分析し、薬機法コンプライアンスをチェックします。
         </p>
       </header>
       
       <InfoPanel />
 
-      <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+      <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 text-zinc-100">
         {/* Left Column */}
         <div className="lg:col-span-2 flex flex-col gap-6">
-          <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+          <div className="bg-black/20 rounded-xl p-4 border border-lime-400/20 backdrop-blur-sm shadow-[0_0_15px_rgba(163,230,53,0.1)]">
             <VideoUpload onFileChange={handleFileChange} onAnalyze={handleAnalyzeClick} isLoading={isLoading} hasVideo={!!videoFile} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-1">
-              <h2 className="text-lg font-medium mb-3 text-zinc-300">スコア</h2>
+              <h2 className="text-lg font-medium mb-3 text-zinc-400">スコア</h2>
               <ScoreDisplay score={analysisResult?.overallScore ?? null} isLoading={isLoading} />
             </div>
             <div className="md:col-span-2">
-               <h2 className="text-lg font-medium mb-3 text-zinc-300">タイムライン</h2>
+               <h2 className="text-lg font-medium mb-3 text-zinc-400">タイムライン</h2>
                <Timeline
                   duration={duration}
                   issues={analysisResult?.issues ?? []}
@@ -194,7 +194,7 @@ const App: React.FC = () => {
                 />
             </div>
             <div className="md:col-span-3">
-              <h2 className="text-lg font-medium mb-3 text-zinc-300">動画プレビュー</h2>
+              <h2 className="text-lg font-medium mb-3 text-zinc-400">動画プレビュー</h2>
                <VideoPlayer
                 ref={videoRef}
                 src={videoUrl}
@@ -206,13 +206,13 @@ const App: React.FC = () => {
         </div>
 
         {/* Right Column */}
-        <div className="lg:col-span-1 bg-zinc-900 rounded-xl p-4 border border-zinc-800 flex flex-col">
-          <div className="flex justify-between items-center mb-4 sticky top-0 bg-zinc-900 pb-3">
-            <h2 className="text-lg font-medium text-zinc-300">分析結果・改善案</h2>
+        <div className="lg:col-span-1 bg-black/20 rounded-xl p-4 border border-lime-400/20 flex flex-col backdrop-blur-sm shadow-[0_0_15px_rgba(163,230,53,0.1)]">
+          <div className="flex justify-between items-center mb-4 sticky top-0 bg-black/50 pb-3 backdrop-blur-sm">
+            <h2 className="text-lg font-medium text-zinc-200">分析結果・改善案</h2>
             {analysisResult && !isLoading && (
               <button
                 onClick={handleDownloadReport}
-                className="flex items-center gap-2 text-xs text-zinc-400 hover:text-white bg-zinc-800 hover:bg-zinc-700 px-3 py-1.5 rounded-md transition-colors"
+                className="flex items-center gap-2 text-xs text-lime-300 hover:text-white bg-zinc-800/50 hover:bg-zinc-700/70 border border-lime-400/20 px-3 py-1.5 rounded-md transition-all"
                 title="分析レポートをダウンロード"
               >
                 <DownloadIcon className="w-4 h-4" />
@@ -222,25 +222,25 @@ const App: React.FC = () => {
           </div>
 
           {analysisResult && !isLoading && (
-            <div className="mb-4 p-3 bg-zinc-800 rounded-lg border border-zinc-700">
-              <h3 className="font-semibold text-zinc-300 mb-1">総評</h3>
-              <p className="text-sm text-zinc-400">{analysisResult.overallComment}</p>
+            <div className="mb-4 p-3 bg-zinc-900/50 rounded-lg border border-lime-400/20">
+              <h3 className="font-semibold text-zinc-200 mb-1">総評</h3>
+              <p className="text-sm text-zinc-300">{analysisResult.overallComment}</p>
             </div>
           )}
           <div className="flex-grow overflow-y-auto pr-2">
             {isLoading && (
               <div className="flex justify-center items-center h-full">
                 <div className="text-center">
-                  <LoadingIcon className="w-12 h-12 mx-auto animate-spin text-blue-500" />
-                  <p className="mt-4 text-lg text-zinc-300">{loadingMessage}</p>
-                  <p className="text-sm text-zinc-500 mt-2">動画の長さにより数分かかることがあります。</p>
+                  <LoadingIcon className="w-12 h-12 mx-auto animate-spin text-lime-400" />
+                  <p className="mt-4 text-lg text-zinc-200">{loadingMessage}</p>
+                  <p className="text-sm text-zinc-400 mt-2">動画の長さにより数分かかることがあります。</p>
                 </div>
               </div>
             )}
-            {error && <div className="text-red-400 bg-red-500/10 border border-red-500/20 p-4 rounded-lg">{error}</div>}
+            {error && <div className="text-red-300 bg-red-950/50 border border-red-500/30 p-4 rounded-lg">{error}</div>}
             {analysisResult && !isLoading && <IssueList issues={analysisResult.issues} onIssueClick={handleSeek} />}
             {!isLoading && !analysisResult && !error && (
-              <div className="flex justify-center items-center h-full text-center text-zinc-500">
+              <div className="flex justify-center items-center h-full text-center text-zinc-400">
                 <p>動画をアップロードして「分析開始」ボタンを押してください。</p>
               </div>
             )}

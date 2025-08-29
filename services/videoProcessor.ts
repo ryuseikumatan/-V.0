@@ -97,7 +97,7 @@ async function extractKeyframes(videoEl: HTMLVideoElement, onProgress: (message:
   const DOWNSAMPLE_WIDTH = 64;
   const DOWNSAMPLE_HEIGHT = 36;
   const FRAME_RATE = 5; // Analyze 5 frames per second
-  const CHANGE_THRESHOLD = 25; // Lower is more sensitive to changes
+  const CHANGE_THRESHOLD = 15; // Lower is more sensitive to changes. Lowered from 25 to 15.
 
   canvas.width = DOWNSAMPLE_WIDTH;
   canvas.height = DOWNSAMPLE_HEIGHT;

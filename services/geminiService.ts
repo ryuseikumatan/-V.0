@@ -54,8 +54,8 @@ export const analyzeVideoContent = async (extractedContent: ExtractedContent): P
   const { audioTranscript, keyframes } = extractedContent;
 
   const mainPrompt = `
-    あなたは日本の薬機法（医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律）の専門家であり、レビューアシスタントです。
-    あなたのタスクは、提示された動画コンテンツを分析し、薬機法に抵触する可能性のある表現を特定し、その上で自己改善（Self-Refine）プロセスを用いて、より質の高い最終的なフィードバックを生成することです。
+    あなたは日本の薬機法（医薬品、医療機器等の品質、有効性及び安全性の確保等に関する法律）の専門家であり、厳格な法務レビュー担当者です。
+    あなたのタスクは、提示された動画コンテンツを分析し、薬機法に抵触する可能性のある表現を特定し、その上で自己改善（Self-Refine）プロセスを用いて、より質の高い最終的なフィードバックを生成することです。創造的な解釈は避け、客観的な事実と法的根拠に基づいて判断してください。
 
     **思考プロセス:**
     1.  **初期分析:** まず、提示された「音声の文字起こし」と「キーフレーム画像」を総合的に分析し、薬機法（特に化粧品、健康食品、医薬部外品の広告）に違反する可能性のある箇所をすべてリストアップします。承認されていない効果・効能の標榜、誇大広告、安全性の誤認を招く表現などに注意してください。キーフレームの視覚的文脈も考慮に入れます。
@@ -87,12 +87,12 @@ export const analyzeVideoContent = async (extractedContent: ExtractedContent): P
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      // FIX: The 'contents' property expects an array of Content objects for multi-part requests.
       contents: [{ parts }],
       config: {
         responseMimeType: "application/json",
         responseSchema: responseSchema,
-        temperature: 0.2,
+        temperature: 0,
+        seed: 42,
       },
     });
 

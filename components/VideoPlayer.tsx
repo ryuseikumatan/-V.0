@@ -19,7 +19,7 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>(
 
     if (!src) {
       return (
-        <div className="aspect-video w-full bg-zinc-900 border-2 border-dashed border-zinc-700 rounded-xl flex flex-col justify-center items-center text-zinc-600">
+        <div className="aspect-video w-full bg-black/20 border-2 border-dashed border-lime-400/20 rounded-xl flex flex-col justify-center items-center text-lime-400/40 backdrop-blur-sm">
           <PlayIcon className="w-16 h-16 mb-4" />
           <p>ここに動画プレビューが表示されます</p>
         </div>

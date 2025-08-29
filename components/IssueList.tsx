@@ -9,7 +9,7 @@ interface IssueListProps {
 
 const IssueCard: React.FC<{ issue: Issue; onClick: () => void }> = ({ issue, onClick }) => (
   <div
-    className="bg-zinc-800/50 p-4 rounded-lg mb-4 border border-zinc-700 hover:border-blue-500 cursor-pointer transition-all"
+    className="bg-zinc-900/50 p-4 rounded-lg mb-4 border border-zinc-800 hover:border-lime-400/50 cursor-pointer transition-all hover:shadow-[0_0_15px_rgba(163,230,53,0.2)]"
     onClick={onClick}
   >
     <div className="flex justify-between items-start mb-2">
@@ -24,16 +24,16 @@ const IssueCard: React.FC<{ issue: Issue; onClick: () => void }> = ({ issue, onC
 
     <div className="space-y-3">
         <div className="flex items-start gap-2">
-            <WarningIcon className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" />
+            <WarningIcon className="w-5 h-5 text-fuchsia-400 mt-0.5 flex-shrink-0" />
             <div>
-                <h4 className="font-semibold text-red-400">問題点</h4>
+                <h4 className="font-semibold text-fuchsia-400">問題点</h4>
                 <p className="text-sm text-zinc-300">{issue.problem}</p>
             </div>
         </div>
         <div className="flex items-start gap-2">
-            <CheckCircleIcon className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+            <CheckCircleIcon className="w-5 h-5 text-lime-400 mt-0.5 flex-shrink-0" />
             <div>
-                <h4 className="font-semibold text-green-400">改善案</h4>
+                <h4 className="font-semibold text-lime-400">改善案</h4>
                 <p className="text-sm text-zinc-300">{issue.suggestion}</p>
             </div>
         </div>
@@ -45,9 +45,9 @@ const IssueCard: React.FC<{ issue: Issue; onClick: () => void }> = ({ issue, onC
 const IssueList: React.FC<IssueListProps> = ({ issues, onIssueClick }) => {
   if (issues.length === 0) {
     return (
-      <div className="flex flex-col justify-center items-center h-full text-center text-zinc-500">
-        <CheckCircleIcon className="w-16 h-16 text-green-500 mb-4" />
-        <h3 className="text-lg font-semibold text-zinc-300">素晴らしいです！</h3>
+      <div className="flex flex-col justify-center items-center h-full text-center text-zinc-400">
+        <CheckCircleIcon className="w-16 h-16 text-lime-400 mb-4"/>
+        <h3 className="text-lg font-semibold text-zinc-200">素晴らしいです！</h3>
         <p>薬機法に抵触する可能性のある表現は見つかりませんでした。</p>
       </div>
     );
@@ -55,8 +55,8 @@ const IssueList: React.FC<IssueListProps> = ({ issues, onIssueClick }) => {
 
   return (
     <div>
-      {issues.map((issue) => (
-        <IssueCard key={issue.timestamp} issue={issue} onClick={() => onIssueClick(issue.timestamp)} />
+      {issues.map((issue, index) => (
+        <IssueCard key={`${issue.timestamp}-${index}`} issue={issue} onClick={() => onIssueClick(issue.timestamp)} />
       ))}
     </div>
   );
